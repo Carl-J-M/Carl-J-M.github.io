@@ -50,8 +50,11 @@ body,html{
   }
   
   .dividerDark{
-    background: #282e34;
-    color:#ddd;
+    background: black;
+    color:white;
+    font-size: 14px;
+    letter-spacing: 3px;
+
     line-height: 0.9px;
     padding: 20px 50px;
   }
@@ -71,9 +74,20 @@ body,html{
         animation: fadeIn 1s ease-in-out;
 
   }
-  .border:hover {
-        
-        
+
+  .listProjects {
+    list-style-type: none;
+  }
+
+  .listProjects li {
+    background-color: black;
+    margin: 20px 40px;
+    color: white;
+    font-size: 27px;
+    letter-spacing: 8px;
+    text-transform: uppercase;
+    padding: 20px 40px;
+
   }
 
   .border {
