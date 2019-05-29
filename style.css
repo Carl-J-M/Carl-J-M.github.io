@@ -1,0 +1,106 @@
+body,html{
+    height: 100%;
+    margin: 0;
+    font-size: 16px;
+    font-family: "Lato", sans-serif;
+    font-weight:400;
+    line-height:1.8em;
+    color:#666;
+  }
+  .backgroundImage1, .backgroundImage2, .backgroundImage3,  .backgroundImage4 {
+    position: relative;
+    opacity: 0.90;
+    background-position: centered;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }  
+
+  .backgroundImage1 {
+    background-image:url("edinburgh-skyline.jpg"); /*landing*/
+    min-height: 100%;
+
+  }
+
+  .backgroundImage2 {
+    background-image:url("code-coding-connection-943096.jpg"); /*skills*/
+    min-height: 100%;
+
+  }
+
+  .backgroundImage3 {
+    background-image:url("paint-splash-background.jpg"); /*projects*/
+    min-height: 100%;
+
+  }
+  .backgroundImage4 {
+    background-image:url("abstract-expressionism-abstract-painting-acrylic-1509534.jpg"); /*contact*/
+    min-height: 100%;
+
+  }
+
+  .divider{
+    text-align: center;
+    padding: 50px 80px;
+  }
+
+  .dividerLight{
+    background: #f4f4f4;
+    color:#666;
+  }
+  
+  .dividerDark{
+    background: #282e34;
+    color:#ddd;
+    line-height: 0.9px;
+    padding: 20px 50px;
+  }
+
+  .imgText1 {
+
+
+        position: absolute;
+        top: 50%;
+        width: 100%;
+        text-align: center;
+        color: white;
+        font-size: 27px;
+        letter-spacing: 8px;
+        text-transform: uppercase;
+
+        animation: fadeIn 1s ease-in-out;
+
+  }
+  .border:hover {
+        
+        
+  }
+
+  .border {
+
+    background-color: black;
+    padding: 50px;
+  }
+
+  @media(max-width:568px){
+    .backgroundImage1, .backgroundImage2, .backgroundImage3, .backgroundImage4{
+      background-attachment: scroll;
+    }
+  }
+
+  @keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(500px)
+        
+    }
+    
+    80% {
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0px)
+
+    }
+}
