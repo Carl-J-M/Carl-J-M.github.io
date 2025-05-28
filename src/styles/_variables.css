@@ -1,0 +1,15 @@
+:root {
+  --font-sans: 'Inter', sans-serif;
+
+  --text-h1: 2rem;
+  --text-h2: 1.5rem;
+  --text-body: 1rem;
+
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+
+  --color-bg: #ffffff;
+  --color-fg: #111111;
+  --color-primary: #4CAF50;
+}

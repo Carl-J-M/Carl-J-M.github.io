@@ -1,0 +1,18 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: var(--space-lg);
+}
+
+.mt-sm { margin-top: var(--space-sm); }
+.mb-md { margin-bottom: var(--space-md); }
+.p-lg  { padding: var(--space-lg); }
+
+.flex {
+  display: flex;
+}
+
+.grid {
+  display: grid;
+  gap: var(--space-md);
+}

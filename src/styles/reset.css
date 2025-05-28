@@ -1,0 +1,6 @@
+/* A very simple reset example */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
