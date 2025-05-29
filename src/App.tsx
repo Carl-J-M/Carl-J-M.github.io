@@ -128,18 +128,18 @@ function App() {
     <Box
       sx={{
         width: '100%',
-        maxWidth: 400,
-        height: '90vh',
-        maxHeight: 700,
+        maxWidth: { xs: '100%', md: 400 },
+        height: { xs: '100vh', md: '90vh' },
+        maxHeight: { xs: 'none', md: 700 },
         bgcolor: 'background.surface',
-        borderRadius: 'xl',
-        boxShadow: 'xl',
+        borderRadius: { xs: 0, md: 'xl' },
+        boxShadow: { xs: 'none', md: 'xl' },
         overflow: 'hidden',
         mx: 'auto',
-        my: 3,
+        my: { xs: 0, md: 3 },
         display: 'flex',
         flexDirection: 'column',
-        border: '1px solid',
+        border: { xs: 'none', md: '1px neutral.300' },
         borderColor: 'divider',
         position: 'relative',
       }}
@@ -460,6 +460,8 @@ function App() {
           py: 2,
           display: 'flex',
           flexDirection: 'column',
+          minHeight: 0,
+          maxHeight: '100%',
           gap: 1.5,
           bgcolor: 'background.level1',
           '&::-webkit-scrollbar': {
@@ -606,6 +608,7 @@ function App() {
             display: 'flex',
             gap: 1,
             overflowX: 'auto',
+            flexShrink: 0,
             '&::-webkit-scrollbar': { display: 'none' },
             animation: 'fadeIn 0.5s ease-out',
             '@keyframes fadeIn': {
@@ -651,6 +654,7 @@ function App() {
           alignItems: 'center',
           gap: 1.5,
           bgcolor: 'background.surface',
+          flexShrink: 0,
         }}
       >
         <Box
