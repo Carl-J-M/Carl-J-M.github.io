@@ -159,6 +159,7 @@ function App() {
           display: 'flex',
           flexDirection: 'column',
           borderRadius: 'xl',
+          visibility: showProjects ? 'visible' : 'hidden',
         }}
       >
         {/* Projects Header */}
@@ -290,6 +291,7 @@ function App() {
           display: 'flex',
           flexDirection: 'column',
           borderRadius: 'xl',
+          visibility: showSkills ? 'visible' : 'hidden',
         }}
       >
         {/* Skills Header */}
