@@ -128,14 +128,14 @@ function App() {
     <Box
       sx={{
         width: '100%',
-        maxWidth: { xs: '100%', md: 400 },
+        maxWidth: { xs: '100%', md: 800 },
         height: { xs: '100vh', md: '90vh' },
-        maxHeight: { xs: 'none', md: 700 },
+        maxHeight: { xs: 'none', md: 800 },
         bgcolor: 'background.surface',
         borderRadius: { xs: 0, md: 'xl' },
         boxShadow: { xs: 'none', md: 'xl' },
         overflow: 'hidden',
-        mx: 'auto',
+        mx: { xs: 0, md: 3 },
         my: { xs: 0, md: 3 },
         display: 'flex',
         flexDirection: 'column',
@@ -464,6 +464,7 @@ function App() {
           flexDirection: 'column',
           minHeight: 0,
           maxHeight: '100%',
+          boxShadow: 'outset 0 -1px 0 rgba(0, 0, 0, 0.1)',
           gap: 1.5,
           bgcolor: 'background.level1',
           '&::-webkit-scrollbar': {
