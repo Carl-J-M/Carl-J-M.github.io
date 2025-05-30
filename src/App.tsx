@@ -1,3 +1,41 @@
+
+type Article = {
+  id?: string;
+  title: string;
+  description: string;
+  date: string;
+  readTime?: string;
+  type?: 'internal' | 'external';
+  link?: string;
+};
+
+type WorkExperience = {
+  company: string;
+  role: string;
+  period: string;
+  current?: boolean;
+  description: string;
+  highlights: string[];
+  technologies?: string[];
+};
+
+type SkillsData = {
+  technical: {
+    [category: string]: string[];
+  };
+  soft: string[];
+};
+
+type Message = {
+  from: 'carl' | 'user';
+  text: string;
+  delay: number;
+  type?: 'skill-bubble';
+  skills?: string[];
+};
+
+
+
 import { useEffect, useState, useRef } from 'react';
 import { Box, Typography, Avatar, Button, Chip, IconButton, Divider } from '@mui/joy';
 import SendIcon from '@mui/icons-material/Send';
@@ -14,7 +52,7 @@ import avatar from './assets/avatar.jpg'; // Ensure you have an avatar image in 
 import diagramScaleOpinionation from './assets/diagram-scale-opinionation.png';
 import diagramScaleOpinionation2 from './assets/diagram-scale-opinionation-2.png';
 
-const initialMessages = [
+const initialMessages: Message[] = [
   { from: 'carl', text: "Hey, I'm Carl 👋", delay: 1000 },
   { from: 'carl', text: "I'm a software developer from the UK, actively seeking out new opportunities.", delay: 1500 },
   { from: 'user', text: 'Hey Carl, what do you specialize in?', delay: 2000 },
@@ -569,16 +607,16 @@ const quickActions = [
 ];
 
 function App() {
-  const [visibleMessages, setVisibleMessages] = useState([]);
+  const [visibleMessages, setVisibleMessages] = useState<Message[]>([]);
   const [isTyping, setIsTyping] = useState(false);
   const [showQuickActions, setShowQuickActions] = useState(true);
   const [activeContent, setActiveContent] = useState('chat');
   const messagesEndRef = useRef(null);
   
   // Data loading states
-  const [articlesData, setArticlesData] = useState(null);
-  const [experienceData, setExperienceData] = useState(null);
-  const [skillsData, setSkillsData] = useState(null);
+  const [articlesData, setArticlesData] = useState<Article[] | null>(null);
+  const [experienceData, setExperienceData] = useState<WorkExperience[] | null>(null);
+  const [skillsData, setSkillsData] = useState<SkillsData | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [currentArticle, setCurrentArticle] = useState(null);
 
