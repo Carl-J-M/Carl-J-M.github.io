@@ -626,7 +626,7 @@ function App() {
   }, [visibleMessages]);
 
   useEffect(() => {
-    const timeoutIds: NodeJS.Timeout[] = [];
+    const timeoutIds: number[] = [];
     let cumulativeDelay = 0;
 
     initialMessages.forEach((message, index) => {
