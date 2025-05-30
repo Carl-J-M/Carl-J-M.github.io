@@ -1,4 +1,3 @@
-
 type Article = {
   id?: string;
   title: string;
@@ -34,8 +33,6 @@ type Message = {
   skills?: string[];
 };
 
-
-
 import { useEffect, useState, useRef } from 'react';
 import { Box, Typography, Avatar, Button, Chip, IconButton, Divider } from '@mui/joy';
 import SendIcon from '@mui/icons-material/Send';
@@ -48,7 +45,7 @@ import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import WorkIcon from '@mui/icons-material/Work';
 import CircleIcon from '@mui/icons-material/Circle';
-import avatar from './assets/avatar.jpg'; // Ensure you have an avatar image in this path
+import avatar from './assets/avatar.jpg';
 import diagramScaleOpinionation from './assets/diagram-scale-opinionation.png';
 import diagramScaleOpinionation2 from './assets/diagram-scale-opinionation-2.png';
 
@@ -326,24 +323,33 @@ const articleContent = {
           Maintainability isn't a single axis—it's a balance between <strong>context independence</strong>, <strong>composability</strong>, and <strong>cognitive load</strong>. But there's another key dimension that influences maintainability and usability in component libraries:
         </Typography>
 
-        {/* Placeholder for first diagram */}
         <Box 
           component="img" 
           src={diagramScaleOpinionation} 
           alt="Scale vs Opinionation - Overlapping circles"
           sx={{ width: '100%', mb: 3, borderRadius: 'md' }}
+          onError={(e) => {
+            // Hide broken images gracefully
+            const target = e.target as HTMLImageElement;
+            target.style.display = 'none';
+          }}
         />
 
         <Typography level="body-sm" sx={{ mb: 3, fontStyle: 'italic', textAlign: 'center', color: 'text.secondary' }}>
           The relationship between a component's scale and its level of opinionation.
         </Typography>
 
-        {/* Placeholder for second diagram */}
-        <Box sx={{ bgcolor: 'neutral.100', p: 4, borderRadius: 'md', mb: 3, textAlign: 'center' }}>
-          <Typography level="body-sm" sx={{ color: 'text.secondary' }}>
-            [Scale vs Opinionation Diagram - Stepped layout]
-          </Typography>
-        </Box>
+        <Box 
+          component="img" 
+          src={diagramScaleOpinionation2} 
+          alt="Scale vs Opinionation - Stepped layout"
+          sx={{ width: '100%', mb: 3, borderRadius: 'md' }}
+          onError={(e) => {
+            // Hide broken images gracefully
+            const target = e.target as HTMLImageElement;
+            target.style.display = 'none';
+          }}
+        />
 
         <Typography level="body-md" sx={{ mb: 4 }}>
           If you were to plot all of the components in your design system on this chart, anything which falls into the overlapping areas is likely to be bending the rules in a way that causes significant maintenance overhead when changes are required as the design system progresses through its lifecycle.
@@ -355,7 +361,6 @@ const articleContent = {
           ⚖️ Scale vs. Opinionation Matrix
         </Typography>
 
-        {/* Table */}
         <Box sx={{ overflowX: 'auto', mb: 4 }}>
           <Box sx={{ minWidth: 600, border: '1px solid', borderColor: 'divider', borderRadius: 'md', overflow: 'hidden' }}>
             <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 2fr 1fr 2fr', bgcolor: 'neutral.100' }}>
@@ -447,7 +452,6 @@ const articleContent = {
 
         <Divider sx={{ my: 3 }} />
 
-        {/* Breaking Rules Sections */}
         <Box sx={{ mb: 4 }}>
           <Typography level="h4" sx={{ mb: 2 }}>
             🔹 Bottom Left: <em>Ultra-Generic Atomic Components</em>
@@ -479,15 +483,6 @@ const articleContent = {
             <Typography level="body-md" sx={{ mb: 1 }}>• Ensure overrides are easy and documented</Typography>
             <Typography level="body-md">• Keep defaults minimal and opt-in where possible</Typography>
           </Box>
-        </Box>
-
-        <Divider sx={{ my: 3 }} />
-
-        {/* Placeholder for third diagram */}
-        <Box sx={{ bgcolor: 'neutral.100', p: 4, borderRadius: 'md', mb: 3, textAlign: 'center' }}>
-          <Typography level="body-sm" sx={{ color: 'text.secondary' }}>
-            [Gray Zone Overlap Diagram]
-          </Typography>
         </Box>
 
         <Divider sx={{ my: 4 }} />
@@ -525,8 +520,8 @@ const articleContent = {
   }
 };
 
-// Add to your articles data
-const articles = [
+// Fixed articles array - ensure all articles have consistent properties
+const articles: Article[] = [
   {
     id: 'universal-components',
     title: "What if components stopped pretending they were universal?",
@@ -544,6 +539,7 @@ const articles = [
     type: 'internal'
   },
   {
+    id: 'tetris-demo',
     title: "Codepen Tetris demo",
     description: "Fun challenge to build playable tetris inside codpen.",
     date: "December 2023",
@@ -552,6 +548,7 @@ const articles = [
     type: 'external'
   },
   {
+    id: 'physics-demo',
     title: "Codepen physics demo",
     description: "Another game experiment, this time with physics.",
     date: "January 2024",
@@ -561,7 +558,7 @@ const articles = [
   }
 ];
 
-const workExperience = [
+const workExperience: WorkExperience[] = [
   {
     company: "Etch",
     role: "Frontend Developer",
@@ -611,14 +608,14 @@ function App() {
   const [isTyping, setIsTyping] = useState(false);
   const [showQuickActions, setShowQuickActions] = useState(true);
   const [activeContent, setActiveContent] = useState('chat');
-  const messagesEndRef = useRef(null);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
   
   // Data loading states
   const [articlesData, setArticlesData] = useState<Article[] | null>(null);
   const [experienceData, setExperienceData] = useState<WorkExperience[] | null>(null);
   const [skillsData, setSkillsData] = useState<SkillsData | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [currentArticle, setCurrentArticle] = useState(null);
+  const [currentArticle, setCurrentArticle] = useState<string | null>(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -629,7 +626,7 @@ function App() {
   }, [visibleMessages]);
 
   useEffect(() => {
-    const timeoutIds = [];
+    const timeoutIds: NodeJS.Timeout[] = [];
     let cumulativeDelay = 0;
 
     initialMessages.forEach((message, index) => {
@@ -670,15 +667,10 @@ function App() {
       // Simulate network delay
       const loadTimer = setTimeout(() => {
         if (activeContent === 'projects') {
-          // Simulate fetched articles with some additions
-          setArticlesData([
-            ...articles,
-          ]);
+          setArticlesData([...articles]);
         } else if (activeContent === 'experience') {
-          // Simulate fetched experience data
           setExperienceData(workExperience);
         } else if (activeContent === 'skills') {
-          // Simulate fetched skills data with categories
           setSkillsData({
             technical: {
               'Frontend Frameworks': ['React', 'Vue', 'Angular', 'Next.js'],
@@ -691,21 +683,22 @@ function App() {
           });
         }
         setIsLoading(false);
-      }, 600); // Fake 600ms load time
+      }, 600);
       
       return () => clearTimeout(loadTimer);
     }
   }, [activeContent]);
 
-  const handleActionClick = (actionId) => {
+  const handleActionClick = (actionId: string) => {
     setActiveContent(actionId);
   };
 
-  const handleArticleClick = (article) => {
-    if (article.type === 'internal') {
+  // Fixed handleArticleClick with proper type safety
+  const handleArticleClick = (article: Article) => {
+    if (article.type === 'internal' && article.id) {
       setCurrentArticle(article.id);
       setActiveContent('article');
-    } else if (article.type === 'external') {
+    } else if (article.type === 'external' && article.link) {
       window.open(article.link, '_blank');
     }
   };
@@ -715,14 +708,13 @@ function App() {
       case 'projects': return 'My Articles & Demos';
       case 'skills': return 'Skills';
       case 'experience': return 'Work Experience';
-      case 'article': return articleContent[currentArticle]?.title || 'Article';
+      case 'article': return currentArticle && articleContent[currentArticle as keyof typeof articleContent]?.title || 'Article';
       default: return null;
     }
   };
 
-
   // Loading component
-  const LoadingContent = ({ text }) => (
+  const LoadingContent = ({ text }: { text: string }) => (
     <Box
       sx={{
         display: 'flex',
@@ -768,7 +760,7 @@ function App() {
         my: { xs: 0, md: 3 },
         display: 'flex',
         flexDirection: 'column',
-        border: { xs: 'none', md: '1px neutral.300' },
+        border: { xs: 'none', md: '1px solid' },
         borderColor: 'divider',
         position: 'relative',
       }}
@@ -914,7 +906,7 @@ function App() {
                         bgcolor: 'primary.50',
                       }}
                     >
-                      {msg.skills.map((skill, idx) => (
+                      {msg.skills?.map((skill, idx) => (
                         <Chip
                           key={idx}
                           size="sm"
@@ -1207,7 +1199,7 @@ function App() {
           </Box>
         )}
 
-        {activeContent === 'article' && currentArticle && articleContent[currentArticle] && (
+        {activeContent === 'article' && currentArticle && articleContent[currentArticle as keyof typeof articleContent] && (
           <Box
             sx={{
               flex: 1,
@@ -1231,11 +1223,11 @@ function App() {
           >
             <Box sx={{ mb: 3 }}>
               <Typography level="body-sm" sx={{ color: 'text.tertiary', mb: 1 }}>
-                {articleContent[currentArticle].date} · {articleContent[currentArticle].readTime}
+                {articleContent[currentArticle as keyof typeof articleContent].date} · {articleContent[currentArticle as keyof typeof articleContent].readTime}
               </Typography>
             </Box>
             
-            {articleContent[currentArticle].content}
+            {articleContent[currentArticle as keyof typeof articleContent].content}
           </Box>
         )}
 
